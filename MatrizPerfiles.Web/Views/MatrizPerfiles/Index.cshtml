@@ -1,0 +1,261 @@
+@{
+    ViewData["Title"] = "Dashboard de Matriz de Perfiles";
+}
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white h-100">
+            <div class="card-body d-flex align-items-center">
+                <div class="fs-1 me-3"><i class="bi bi-grid-3x3-gap-fill"></i></div>
+                <div>
+                    <h6 class="card-title text-white-50 mb-0">Total Registros</h6>
+                    <h2 class="mb-0 fw-bold">@ViewBag.TotalRecords</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-secondary text-white h-100">
+            <div class="card-body d-flex align-items-center">
+                <div class="fs-1 me-3"><i class="bi bi-pc-display"></i></div>
+                <div>
+                    <h6 class="card-title text-white-50 mb-0">Sistemas</h6>
+                    <h2 class="mb-0 fw-bold">@ViewBag.SistemasCount</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-info text-white h-100" style="background-color: var(--accent-color) !important;">
+            <div class="card-body d-flex align-items-center">
+                <div class="fs-1 me-3"><i class="bi bi-briefcase"></i></div>
+                <div>
+                    <h6 class="card-title text-white-50 mb-0">Puestos</h6>
+                    <h2 class="mb-0 fw-bold">@ViewBag.PuestosCount</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Advanced Search Panel -->
+<div class="card mb-4" id="filterCard">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#filterBody" style="cursor:pointer">
+        <span><i class="bi bi-funnel me-1"></i> Búsqueda Avanzada</span>
+        <i class="bi bi-chevron-down"></i>
+    </div>
+    <div class="collapse" id="filterBody">
+        <div class="card-body bg-light">
+            <form id="filterForm">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label small fw-bold">Empresa</label>
+                        <input type="text" id="fltEmpresa" class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small fw-bold">Sistema</label>
+                        <select id="fltSistema" asp-items="ViewBag.Sistemas" class="form-select form-select-sm">
+                            <option value="">-- Todos --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small fw-bold">Puesto</label>
+                        <select id="fltPuesto" asp-items="ViewBag.Puestos" class="form-select form-select-sm">
+                            <option value="">-- Todos --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small fw-bold">Código</label>
+                        <input type="text" id="fltCodigo" class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label small fw-bold">Rol Asociado</label>
+                        <input type="text" id="fltRol" class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label small fw-bold">Fecha Desde</label>
+                        <input type="date" id="fltFechaDesde" class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label small fw-bold">Fecha Hasta</label>
+                        <input type="date" id="fltFechaHasta" class="form-control form-control-sm" />
+                    </div>
+                </div>
+                <div class="mt-3 text-end">
+                    <button type="button" class="btn btn-sm btn-light border" id="btnResetFilters">Limpiar</button>
+                    <button type="button" class="btn btn-sm btn-primary" id="btnApplyFilters"><i class="bi bi-search me-1"></i>Aplicar Filtros</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Main Datatable -->
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="bi bi-table me-2"></i>Registros de Matriz</h5>
+        <a asp-action="Create" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle me-1"></i>Nuevo Registro</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="matrizTable" class="table table-hover table-striped w-100 display nowrap">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Empresa</th>
+                        <th>Desc. Unidad Organizativa</th>
+                        <th>Código</th>
+                        <th>Sistema</th>
+                        <th>Puesto</th>
+                        <th>Módulo</th>
+                        <th>SubMódulo</th>
+                        <th>Menú</th>
+                        <th>Sitio</th>
+                        <th>SubSitio</th>
+                        <th>Opción Menú</th>
+                        <th>Opción</th>
+                        <th>Programa</th>
+                        <th>Archivo Programa</th>
+                        <th>Función Rol Asociado</th>
+                        <th>Cod Id Función</th>
+                        <th>Operación</th>
+                        <th>Descripción</th>
+                        <th>Vistas</th>
+                        <th>Tipo</th>
+                        <th>Nivel</th>
+                        <th>Carpeta</th>
+                        <th>Fuente Datos</th>
+                        <th>Tipo Destino</th>
+                        <th>Grupo</th>
+                        <th>Trans</th>
+                        <th>Bloque</th>
+                        <th>Tipo Perfil</th>
+                        <th>Workflow</th>
+                        <th>Workview</th>
+                        <th>SubMenú</th>
+                        <th>Nivel 1</th>
+                        <th>Nivel 2</th>
+                        <th>Nivel 3</th>
+                        <th>Nivel 4</th>
+                        <th>Nivel 5</th>
+                        <th>Nivel 6</th>
+                        <th>Nivel 7</th>
+                        <th>Fecha Creación</th>
+                        <th class="text-end">Acciones</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var table = $('#matrizTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '@Url.Action("GetDataTableData", "MatrizPerfiles")',
+                    type: 'POST',
+                    data: function(d) {
+                        d.empresa = $('#fltEmpresa').val();
+                        d.sistemaId = $('#fltSistema').val();
+                        d.puestoId = $('#fltPuesto').val();
+                        d.codigo = $('#fltCodigo').val();
+                        d.funcionRolAsociado = $('#fltRol').val();
+                        d.startDate = $('#fltFechaDesde').val();
+                        d.endDate = $('#fltFechaHasta').val();
+                    }
+                },
+                columns: [
+                    { data: 'id', name: 'Id' },
+                    { data: 'empresa', name: 'Empresa' },
+                    { data: 'descripcionUnidadOrganizativa', name: 'DescripcionUnidadOrganizativa' },
+                    { data: 'codigo', name: 'Codigo' },
+                    { data: 'sistemaNombre', name: 'Sistema.Nombre' },
+                    { data: 'puestoNombre', name: 'Puesto.Nombre' },
+                    { data: 'modulo', name: 'Modulo' },
+                    { data: 'subModulo', name: 'SubModulo' },
+                    { data: 'menu', name: 'Menu' },
+                    { data: 'sitio', name: 'Sitio' },
+                    { data: 'subSitio', name: 'SubSitio' },
+                    { data: 'opcionDeMenu', name: 'OpcionDeMenu' },
+                    { data: 'opcion', name: 'Opcion' },
+                    { data: 'programa', name: 'Programa' },
+                    { data: 'archivoDePrograma', name: 'ArchivoDePrograma' },
+                    { data: 'funcionRolAsociado', name: 'FuncionRolAsociado' },
+                    { data: 'codigoIdFuncion', name: 'CodigoIdFuncion' },
+                    { data: 'operacion', name: 'Operacion' },
+                    { data: 'descripcion', name: 'Descripcion' },
+                    { data: 'vistas', name: 'Vistas' },
+                    { data: 'tipo', name: 'Tipo' },
+                    { data: 'nivel', name: 'Nivel' },
+                    { data: 'carpeta', name: 'Carpeta' },
+                    { data: 'fuenteDeDatos', name: 'FuenteDeDatos' },
+                    { data: 'tipoDestino', name: 'TipoDestino' },
+                    { data: 'grupo', name: 'Grupo' },
+                    { data: 'trans', name: 'Trans' },
+                    { data: 'bloque', name: 'Bloque' },
+                    { data: 'tipoDePerfil', name: 'TipoDePerfil' },
+                    { data: 'workflow', name: 'Workflow' },
+                    { data: 'workview', name: 'Workview' },
+                    { data: 'subMenu', name: 'SubMenu' },
+                    { data: 'funcionNivel1', name: 'FuncionNivel1' },
+                    { data: 'funcionNivel2', name: 'FuncionNivel2' },
+                    { data: 'funcionNivel3', name: 'FuncionNivel3' },
+                    { data: 'funcionNivel4', name: 'FuncionNivel4' },
+                    { data: 'funcionNivel5', name: 'FuncionNivel5' },
+                    { data: 'funcionNivel6', name: 'FuncionNivel6' },
+                    { data: 'funcionNivel7', name: 'FuncionNivel7' },
+                    { data: 'fechaCreacion', name: 'FechaCreacion' },
+                    { 
+                        data: 'id', 
+                        orderable: false, 
+                        searchable: false, 
+                        className: 'text-end',
+                        render: function(data) {
+                            return `<div class="btn-group btn-group-sm">
+                                <a href="/MatrizPerfiles/Details/${data}" class="btn btn-outline-info" title="Detalles"><i class="bi bi-eye"></i></a>
+                                <a href="/MatrizPerfiles/Edit/${data}" class="btn btn-outline-secondary" title="Editar"><i class="bi bi-pencil"></i></a>
+                                <button type="button" class="btn btn-outline-danger" onclick="confirmDelete('/MatrizPerfiles/Delete', ${data}, 'matrizTable')" title="Eliminar"><i class="bi bi-trash"></i></button>
+                            </div>`;
+                        }
+                    }
+                ],
+                scrollX: true,
+                order: [[0, "desc"]],
+                language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+                dom: "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
+                     "<'row'<'col-sm-12'tr>>" +
+                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                buttons: [
+                    { extend: 'excelHtml5', className: 'btn btn-sm btn-success', text: '<i class="bi bi-file-earmark-excel"></i> Excel', exportOptions: { columns: ':not(:last-child)' } },
+                    { extend: 'pdfHtml5', className: 'btn btn-sm btn-danger', text: '<i class="bi bi-file-earmark-pdf"></i> PDF', orientation: 'landscape', pageSize: 'A0', exportOptions: { columns: ':not(:last-child)' } },
+                    { extend: 'csvHtml5', className: 'btn btn-sm btn-info text-white', text: '<i class="bi bi-filetype-csv"></i> CSV', exportOptions: { columns: ':not(:last-child)' } }
+                ],
+                drawCallback: function(settings) {
+                    var api = this.api();
+                    if(api.rows().count() === 0) {
+                        $('#matrizTable tbody').html('<tr><td colspan="8" class="text-center py-5"><div class="empty-state"><i class="bi bi-folder-x fs-1 text-muted"></i><p class="mt-2 text-muted">No se encontraron registros</p></div></td></tr>');
+                    }
+                }
+            });
+
+            $('#btnApplyFilters').click(function() {
+                table.draw();
+            });
+
+            $('#btnResetFilters').click(function() {
+                $('#filterForm')[0].reset();
+                table.draw();
+            });
+
+            @if(TempData["SuccessMessage"] != null)
+            {
+                <text>toastr.success('@TempData["SuccessMessage"]');</text>
+            }
+        });
+    </script>
+}

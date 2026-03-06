@@ -1,0 +1,219 @@
+@model MatrizPerfiles.Web.ViewModels.MatrizPerfilViewModel
+
+<ul class="nav nav-tabs mb-4 px-3 pt-3" id="matrizTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active fw-bold" id="identificacion-tab" data-bs-toggle="tab" data-bs-target="#identificacion" type="button" role="tab">Identificación</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold" id="navegacion-tab" data-bs-toggle="tab" data-bs-target="#navegacion" type="button" role="tab">Navegación</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold" id="programa-tab" data-bs-toggle="tab" data-bs-target="#programa" type="button" role="tab">Programa</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold" id="clasificacion-tab" data-bs-toggle="tab" data-bs-target="#clasificacion" type="button" role="tab">Clasificación</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold" id="jerarquia-tab" data-bs-toggle="tab" data-bs-target="#jerarquia" type="button" role="tab">Jerarquía</button>
+    </li>
+</ul>
+
+<div class="tab-content" id="matrizTabsContent">
+    
+    <!-- TAB 1: Identificación -->
+    <div class="tab-pane fade show active p-3" id="identificacion" role="tabpanel">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="MatrizPerfil.Empresa" class="form-label text-muted fw-bold">Empresa <span class="text-danger">*</span></label>
+                <input asp-for="MatrizPerfil.Empresa" class="form-control" required />
+                <span asp-validation-for="MatrizPerfil.Empresa" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="MatrizPerfil.DescripcionUnidadOrganizativa" class="form-label text-muted fw-bold">Unidad Organizativa</label>
+                <input asp-for="MatrizPerfil.DescripcionUnidadOrganizativa" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.PuestoId" class="form-label text-muted fw-bold">Puesto <span class="text-danger">*</span></label>
+                <select asp-for="MatrizPerfil.PuestoId" asp-items="Model.ListaPuestos" class="form-select" required>
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="MatrizPerfil.PuestoId" class="text-danger small"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.SistemaId" class="form-label text-muted fw-bold">Sistema <span class="text-danger">*</span></label>
+                <select asp-for="MatrizPerfil.SistemaId" asp-items="Model.ListaSistemas" class="form-select" required>
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="MatrizPerfil.SistemaId" class="text-danger small"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.Codigo" class="form-label text-muted fw-bold">Código</label>
+                <input asp-for="MatrizPerfil.Codigo" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: Navegación -->
+    <div class="tab-pane fade p-3" id="navegacion" role="tabpanel">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.Modulo" class="form-label text-muted fw-bold">Módulo</label>
+                <input asp-for="MatrizPerfil.Modulo" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.SubModulo" class="form-label text-muted fw-bold">SubMódulo</label>
+                <input asp-for="MatrizPerfil.SubModulo" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.Menu" class="form-label text-muted fw-bold">Menú</label>
+                <input asp-for="MatrizPerfil.Menu" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.SubMenu" class="form-label text-muted fw-bold">SubMenú</label>
+                <input asp-for="MatrizPerfil.SubMenu" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.Sitio" class="form-label text-muted fw-bold">Sitio</label>
+                <input asp-for="MatrizPerfil.Sitio" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.SubSitio" class="form-label text-muted fw-bold">SubSitio</label>
+                <input asp-for="MatrizPerfil.SubSitio" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="MatrizPerfil.OpcionDeMenu" class="form-label text-muted fw-bold">Opción De Menú</label>
+                <input asp-for="MatrizPerfil.OpcionDeMenu" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="MatrizPerfil.Opcion" class="form-label text-muted fw-bold">Opción</label>
+                <input asp-for="MatrizPerfil.Opcion" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: Programa -->
+    <div class="tab-pane fade p-3" id="programa" role="tabpanel">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="MatrizPerfil.Programa" class="form-label text-muted fw-bold">Programa</label>
+                <input asp-for="MatrizPerfil.Programa" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="MatrizPerfil.ArchivoDePrograma" class="form-label text-muted fw-bold">Archivo De Programa</label>
+                <input asp-for="MatrizPerfil.ArchivoDePrograma" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.FuncionRolAsociado" class="form-label text-muted fw-bold">Función Rol Asociado</label>
+                <input asp-for="MatrizPerfil.FuncionRolAsociado" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.CodigoIdFuncion" class="form-label text-muted fw-bold">Código Id Función</label>
+                <input asp-for="MatrizPerfil.CodigoIdFuncion" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.Operacion" class="form-label text-muted fw-bold">Operación</label>
+                <input asp-for="MatrizPerfil.Operacion" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: Clasificación -->
+    <div class="tab-pane fade p-3" id="clasificacion" role="tabpanel">
+        <div class="row g-3">
+            <div class="col-md-12">
+                <label asp-for="MatrizPerfil.Descripcion" class="form-label text-muted fw-bold">Descripción</label>
+                <textarea asp-for="MatrizPerfil.Descripcion" class="form-control" rows="2"></textarea>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.Vistas" class="form-label text-muted fw-bold">Vistas</label>
+                <input asp-for="MatrizPerfil.Vistas" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.Tipo" class="form-label text-muted fw-bold">Tipo</label>
+                <input asp-for="MatrizPerfil.Tipo" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.Nivel" class="form-label text-muted fw-bold">Nivel</label>
+                <input asp-for="MatrizPerfil.Nivel" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.Carpeta" class="form-label text-muted fw-bold">Carpeta</label>
+                <input asp-for="MatrizPerfil.Carpeta" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.FuenteDeDatos" class="form-label text-muted fw-bold">Fuente De Datos</label>
+                <input asp-for="MatrizPerfil.FuenteDeDatos" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.TipoDestino" class="form-label text-muted fw-bold">Tipo Destino</label>
+                <input asp-for="MatrizPerfil.TipoDestino" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.Grupo" class="form-label text-muted fw-bold">Grupo</label>
+                <input asp-for="MatrizPerfil.Grupo" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.Trans" class="form-label text-muted fw-bold">Trans</label>
+                <input asp-for="MatrizPerfil.Trans" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.Bloque" class="form-label text-muted fw-bold">Bloque</label>
+                <input asp-for="MatrizPerfil.Bloque" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.TipoDePerfil" class="form-label text-muted fw-bold">Tipo De Perfil</label>
+                <input asp-for="MatrizPerfil.TipoDePerfil" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.Workflow" class="form-label text-muted fw-bold">Workflow</label>
+                <input asp-for="MatrizPerfil.Workflow" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.Workview" class="form-label text-muted fw-bold">Workview</label>
+                <input asp-for="MatrizPerfil.Workview" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 5: Jerarquía -->
+    <div class="tab-pane fade p-3" id="jerarquia" role="tabpanel">
+        <div class="row g-3">
+            <div class="col-md-12">
+                <div class="alert alert-light border border-info d-flex align-items-center">
+                    <i class="bi bi-info-circle text-info fs-4 me-3"></i>
+                    <div>
+                        Defina los niveles de la función jerárquica para la estructura de permisos.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.FuncionNivel1" class="form-label text-muted fw-bold">Función Nivel 1</label>
+                <input asp-for="MatrizPerfil.FuncionNivel1" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.FuncionNivel2" class="form-label text-muted fw-bold">Función Nivel 2</label>
+                <input asp-for="MatrizPerfil.FuncionNivel2" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MatrizPerfil.FuncionNivel3" class="form-label text-muted fw-bold">Función Nivel 3</label>
+                <input asp-for="MatrizPerfil.FuncionNivel3" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.FuncionNivel4" class="form-label text-muted fw-bold">Función Nivel 4</label>
+                <input asp-for="MatrizPerfil.FuncionNivel4" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.FuncionNivel5" class="form-label text-muted fw-bold">Función Nivel 5</label>
+                <input asp-for="MatrizPerfil.FuncionNivel5" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.FuncionNivel6" class="form-label text-muted fw-bold">Función Nivel 6</label>
+                <input asp-for="MatrizPerfil.FuncionNivel6" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="MatrizPerfil.FuncionNivel7" class="form-label text-muted fw-bold">Función Nivel 7</label>
+                <input asp-for="MatrizPerfil.FuncionNivel7" class="form-control" />
+            </div>
+        </div>
+    </div>
+</div>
